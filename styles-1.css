@@ -1,0 +1,1025 @@
+:root {
+  --ink:#051019;
+  --paper:#f4f7f9;
+  --pink:#ff3495;
+  --violet-soft:rgba(124,92,255,.22);
+  --green:#a7fc00;
+  --green-soft:rgba(34,199,122,.22);
+  --amber:#ffb020;
+  --red:#ff5470;
+  --white:#ffffff;
+  --font-main: 'Montserrat Alternates Regular', sans-serif;
+  --font--bold: 'Montserrat Alternates Bold', sans-serif;
+}
+@font-face {
+  font-family: 'Montserrat Alternates Regular';
+  src: url('./assets/fonts/MontserratAlternates-Regular.ttf');
+}
+@font-face {
+  font-family: 'Montserrat Alternates Bold';
+  src: url('./assets/fonts/MontserratAlternates-ExtraBold.ttf');
+}
+* {
+  box-sizing:border-box;
+  user-select:none;
+  -webkit-user-select: none;
+}
+
+html, body {
+  margin:0;
+  padding:0;
+  height:100%;
+  background:var(--ink);
+  font-family:var(--font-main);
+  color:var(--paper);
+  overflow:hidden;
+}
+
+button {
+  font-family:var(--font-main);
+  cursor:pointer;
+}
+
+img {
+  -webkit-user-drag:none;
+  user-select:none;
+}
+
+#app {
+  position:relative;
+  width:100vw;
+  height:100vh;
+  overflow:hidden;
+}
+
+.screen {
+  position:absolute;
+  inset:0;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.screen.is-active {
+  display:flex;
+}
+
+.bg-image {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:0;
+}
+.bg-image-pillars {
+  position:absolute;
+  top:40%;
+  right:17%;
+  width: 85%;
+  height:auto;
+  object-fit:cover;
+  z-index:0;
+}
+.bg-image-cell_tower {
+  position:absolute;
+  top:14%;
+  width:230px;
+  height:auto;
+  object-fit:cover;
+  right:10%;
+  z-index:2;
+}
+.title-inner {
+  bottom: 17%;
+  position:relative;
+  z-index:2;
+  max-width:76vmin;
+  text-align:center;
+  padding:4vmin;
+}
+
+.brand-mark .dot {
+  width:1vmin;
+  height:1vmin;
+  border-radius:50%;
+  background:var(--pink);
+}
+
+h1.hero {
+  font-family:var(--font--bold);
+  font-weight:700;
+  font-size:clamp(28px,5.4vmin,64px);
+  line-height:1.08;
+  margin:0 0 2vmin;
+  color:var(--white);
+}
+
+p.lede {
+  font-family:var(--font--main);
+  line-height:1.5;
+  color:#ffffff;
+  max-width:56ch;
+  margin:0 auto 4vmin;
+}
+
+.btn-primary {
+  background:var(--pink);
+  color:var(--white);
+  border:none;
+  border-radius:100px;
+  padding:1.6vmin 3.4vmin;
+  font-weight:700;
+  font-size:clamp(14px,1.8vmin,18px);
+  box-shadow:0 1vmin 2.4vmin -0.6vmin var(--violet-soft);
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.btn-primary:hover {
+  transform:translateY(-2px);
+}
+
+.btn-ghost {
+  background:transparent;
+  color:var(--paper);
+  border:1.5px solid rgba(255,255,255,.35);
+  border-radius:100px;
+  padding:1.3vmin 2.8vmin;
+  font-weight:600;
+  font-size:clamp(13px,1.5vmin,16px);
+}
+
+.btn-ghost:hover {
+  border-color:#fff;
+}
+.radio-icon {
+  margin-left: 5px;
+}
+
+.btn-small {
+  background:var(--violet);
+  color:var(--white);
+  border:none;
+  border-radius:100px;
+  padding:1.2vmin 2.6vmin;
+  font-weight:700;
+  font-size:clamp(13px,1.5vmin,15px);
+}
+#btn-restart-module {
+  color:var(--pink);
+}
+.btn-small:disabled {
+  opacity:.4;
+}
+
+.btn-back {
+  background:none;
+  border:none;
+  color:var(--pink);
+  font-weight:600;
+  font-size:clamp(13px,1.5vmin,15px);
+  display:flex;
+  align-items:center;
+  gap:.6vmin;
+}
+.btn-back:hover {
+  color:#fff;
+}
+.status-block {
+  margin-bottom: 24px;
+  margin-top: .6vmin;
+}
+
+.status-title {
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.status-ok {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+.connections {
+  display: flex;
+  gap: 10px;
+}
+
+.connection-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+
+.connection-dot.pink {
+  background: var(--pink);
+}
+
+.connection-dot.green {
+  background: var(--green);
+}
+
+.connection-dot.blue {
+  background: #00bfff;
+}
+.progress-corner {
+  position:absolute;
+  top:2.4vmin;
+  right:3vmin;
+  z-index:6;
+  width:30%;
+  border-radius:1.4vmin;
+  padding:1.2vmin 1.8vmin;
+}
+.progress-corner__label {
+  font-size:12px;
+  color:black;
+  margin-bottom:.6vmin;
+  letter-spacing:.02em;
+}
+
+.progress-corner__track {
+  height:15px;
+  border-radius:100px;
+  border: 0.5px black solid;
+  background:rgba(255,255,255,.14);
+  overflow:hidden;
+}
+.progress-corner__fill {
+  height:100%;
+  width:0%;
+  border-radius:100px;
+  background:var(--pink);
+  transition:width .4s ease, background .4s ease;
+}
+.progress-corner__fill.mid {
+  background:var(--pink);
+}
+.progress-corner__fill.full {
+  background:var(--green);
+}
+.progress-corner__value {
+  margin-top:.6vmin;
+  font-size:12px;
+  color:black;
+  text-align:right;
+}
+
+/* =========================================================
+   СЦЕНА И ОБЪЕКТЫ
+   ========================================================= */
+#scene {
+  position:absolute;
+  inset:0;
+  transition:filter .35s ease;
+}
+#scene.scene-locked .hotspot {
+  pointer-events:none;
+}
+
+.decor {
+  position:absolute;
+  z-index:1;
+  pointer-events:none;
+}
+#decor-car {
+  left:46vmin;
+  bottom:8vh;
+  width:18vmin;
+}
+
+.hotspot {
+  position:absolute;
+  z-index:2;
+  background:none;
+  border:none;
+  padding:0;
+  transition:transform .2s ease, filter .3s ease;
+}
+
+.hotspot-img {
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:contain;
+}
+.hotspot:hover:not(.is-locked) {
+  transform:scale(1.06);
+}
+.hotspot:focus-visible {
+  outline:3px solid var(--white);
+  outline-offset:6px;
+  border-radius:12px;
+}
+
+.hotspot.shake {
+  animation:shake .4s ease;
+}
+@keyframes shake {
+  0%,100% {
+    transform:translateX(0);
+  }
+  20% {
+    transform:translateX(-1.2vmin);
+  }
+  40% {
+    transform:translateX(1.2vmin);
+  }
+  60% {
+    transform:translateX(-.8vmin);
+  }
+  80% {
+    transform:translateX(.8vmin);
+  }
+}
+
+.hotspot--house {
+  left:10%;
+  bottom:0%;
+  width:18%;
+  height:auto;
+  z-index: 10;
+}
+#decor-pillars-one {
+  bottom:15%;
+  height:auto;
+  width:50%;
+}
+#decor-pillars-two {
+  left: 55%;
+  bottom:15%;
+  height:auto;
+  width:50%;
+}
+.hotspot--tower {
+  left:45%;
+  bottom:8%;
+  width:12%;
+  height:auto;
+}
+.hotspot--lightning {
+  left:17%;
+  bottom:25%;
+  width:7%;
+  height:auto;
+}
+#decor-car {
+  left:75%;
+  bottom:2%;
+  width:12%;
+  height:auto;
+}
+
+.dialogue-catcher {
+  position:absolute;
+  inset:0;
+  z-index:4;
+  display:none;
+  cursor:pointer;
+}
+.dialogue-catcher.is-active {
+  display:block;
+}
+
+.complete-cta {
+  position:absolute;
+  bottom:3vmin;
+  left:50%;
+  transform:translate(-50%,140%);
+  z-index:7;
+  transition:transform .4s ease;
+}
+.complete-cta.is-visible {
+  transform:translate(-50%,0);
+}
+
+/* =========================================================
+   МАСКОТ — 2 позы, выезжает справа или слева
+   ========================================================= */
+.mascot {
+  position:fixed;
+  z-index:20;
+  display:flex;
+  align-items:flex-end;
+  gap:1.6vmin;
+  max-width:10%;
+  transition:opacity .3s ease, right .35s ease, left .35s ease;
+  opacity:0;
+  pointer-events:none;
+  bottom:2vmin;
+}
+#mascot-text {
+  text-align: justify;
+}
+.mascot.is-visible {
+  opacity:1;
+  pointer-events:auto;
+}
+.mascot--right {
+  right:3%;
+  left:auto;
+  flex-direction:row-reverse;
+}
+.mascot--left {
+  left:2vmin;
+  right:auto;
+  flex-direction:row;
+}
+
+.mascot-figure {
+  width:270%;
+  height:auto;
+  flex:none;
+  cursor:pointer;
+  display:block;
+}
+#scene.blurred {
+  filter: brightness(0.4) blur(6px);
+}
+.speech-bubble {
+  font-family: var(--font-main);
+  position: absolute;
+  color:var(--ink);
+  border-radius:2.2vmin;
+  padding:1.6vmin 2vmin;
+  font-size:15px;
+  line-height:1.5;
+  width:260%;
+  top: 70%;
+  opacity:0;
+  transform:translateY(6px);
+  transition:opacity .3s ease, transform .3s ease;
+  pointer-events:none;
+}
+.speech-bubble.is-visible {
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+.speech-bubble p {
+  margin:0 0 .6vmin;
+}
+.bubble-continue {
+  display:block;
+  font-size:1.15vmin;
+  color:#7c5cff;
+  font-weight:700;
+}
+
+/* =========================================================
+   ТЕСТЕР СИГНАЛА + КРУПНЫЙ ПЛАН ВЫШКИ
+   ========================================================= */
+#overlay-tower {
+  align-items:flex-end;
+  justify-content:center;
+  padding:0;
+}
+
+.tower-zoom {
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  height:100vh;
+  object-fit:cover;
+  z-index:1;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.device-panel {
+  position:absolute;
+  right:23%;
+  bottom:3vmin;
+  z-index:3;
+  width:34vmin;
+  border-radius:1.6vmin;
+  padding:2vmin;
+  text-align:center;
+  opacity:0;
+  transform:translateY(12px);
+  transition:opacity .3s ease, transform .3s ease;
+}
+.device-panel.is-visible {
+  opacity:1;
+  transform:translateY(0);
+}
+.device-panel__art {
+  width:60%;
+  margin:0 auto 1vmin;
+  display:block;
+}
+.device-panel__header {
+  font-family:var(--font-main);
+  font-weight:700;
+  font-size:1.6vmin;
+  margin-bottom:1vmin;
+}
+.device-panel__reading {
+  font-size:20px;
+  color:var(--pink);
+  font-family:var(--font--bold);
+  font-weight:700;
+  margin-bottom:1.4vmin;
+  min-height:2vmin;
+}
+.device-panel__reading.good {
+  color:var(--green);
+}
+.overlay-return {
+  position:absolute;
+  bottom:3vmin;
+  left:3vmin;
+  z-index:3;
+}
+#tower-back {
+  position: absolute;
+  bottom: 90%;
+  left: 27%;
+  font-family: var(--font--bold);
+  font-size: 18px;
+}
+/* =========================================================
+   OVERLAY-ПАНЕЛИ (общие: оборудование, финальная цепь)
+   ========================================================= */
+.overlay {
+  position:absolute;
+  inset:0;
+  z-index:10;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:4vmin;
+}
+
+.overlay.is-active {
+  display:flex;
+}
+.overlay-panel {
+  background:black;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:2.4vmin;
+  max-width:74vmin;
+  width:100%;
+  padding:4vmin;
+  box-shadow:0 3vmin 8vmin rgba(0,0,0,.55);
+  max-height:88vh;
+  overflow:auto;
+  position:relative;
+  z-index:2;
+}
+.overlay-eyebrow {
+  font-size:1.3vmin;
+  color:var(--violet);
+  font-weight:700;
+  letter-spacing:.03em;
+  margin-bottom:1vmin;
+}
+.overlay-title {
+  font-family:var(--font-main);
+  font-weight:700;
+  font-size:clamp(18px,2.6vmin,28px);
+  margin:0 0 1.6vmin;
+  color:var(--white);
+}
+.overlay-body {
+  font-size:clamp(13px,1.6vmin,16px);
+  line-height:1.55;
+  color:white;
+  margin-bottom:2.2vmin;
+}
+.overlay-actions {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:3vmin;
+  gap:2vmin;
+  flex-wrap:wrap;
+}
+
+.status-row {
+  display:flex;
+  align-items:center;
+  gap:1.4vmin;
+  padding:1.6vmin 0;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.status-row:first-of-type {
+  border-top:none;
+}
+.status-text {
+  flex:1;
+  font-size:clamp(13px,1.5vmin,15px);
+}
+.status-text b {
+  display:block;
+  font-size:clamp(14px,1.7vmin,17px);
+  margin-bottom:.6vmin;
+}
+
+.chip-row {
+  display:flex;
+  flex-wrap:wrap;
+  gap:1.2vmin;
+  margin-top:1.4vmin;
+}
+.inline-msg {
+  font-size:clamp(12px,1.4vmin,14px);
+  margin-top:1.2vmin;
+  min-height:2.4vmin;
+  color:var(--pink);
+}
+.inline-msg.good {
+  color:var(--green);
+}
+
+/* ---- слайдер питания, 5 остановок ---- */
+.power-slider-wrap {
+  margin-top:1.6vmin;
+}
+#power-slider {
+  width:100%;
+  height:.6vmin;
+  border-radius:100px;
+  -webkit-appearance:none;
+  appearance:none;
+  background:linear-gradient(90deg, var(--red), var(--amber), var(--green), var(--amber), var(--red));
+  outline:none;
+}
+#power-slider::-webkit-slider-thumb {
+  -webkit-appearance:none;
+  appearance:none;
+  width:2.4vmin;
+  height:2.4vmin;
+  border-radius:50%;
+  background:var(--white);
+  border:3px solid var(--violet);
+  cursor:pointer;
+  box-shadow:0 .4vmin 1vmin rgba(0,0,0,.4);
+}
+#power-slider::-moz-range-thumb {
+  width:2.4vmin;
+  height:2.4vmin;
+  border-radius:50%;
+  background:var(--white);
+  border:3px solid var(--violet);
+  cursor:pointer;
+}
+.power-slider-ticks {
+  display:flex;
+  justify-content:space-between;
+  font-size:1.3vmin;
+  color:#9db6c8;
+  margin-top:.8vmin;
+}
+
+/* =========================================================
+   ПРОВОДА В ДОМЕ (штекеры перетаскиваются)
+   ========================================================= */
+#overlay-wires {
+  padding:0;
+}
+.wires-panel {
+  position:relative;
+  z-index:2;
+  max-width:80vmin;
+  width:92%;
+  margin:0 auto;
+  background:rgba(10,20,30,.72);
+  border-radius:2.2vmin;
+  backdrop-filter:blur(4px);
+  overflow: hidden;
+}
+#wires-back,
+#wires-continue {
+  z-index: 20;
+}
+#wires-back {
+  padding: 3%;
+}
+.bg-wires {
+  position: absolute;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+}
+.wires-board {
+  position:relative;
+  height:40vmin;
+  margin:2vmin 0;
+  touch-action:none;
+}
+.wires-svg {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+}
+.wire-line {
+  stroke-width:6px;
+  fill:none;
+  stroke-linecap:round;
+}
+.wire-line.correct {
+  stroke:var(--green);
+}
+.wire-line.incorrect {
+  stroke:var(--pink);
+  stroke-dasharray:10 8;
+}
+
+.wire-socket {
+  position:absolute;
+  width:9vmin;
+  padding:1vmin 0;
+  border-radius:1vmin;
+  text-align:center;
+  font-family:var(--font-main);
+  font-weight:700;
+  font-size:clamp(11px,1.3vmin,14px);
+  background:rgba(255,255,255,.08);
+  border:1.5px solid rgba(255, 255, 255);
+  color:white;
+  transform:translate(-50%,-50%);
+}
+#btn-final-stage {
+  margin-top: 20px;
+}
+
+.wire-socket.left {
+}
+.wire-socket.right {
+}
+
+.wire-anchor {
+  position:absolute;
+  width:2vmin;
+  height:2vmin;
+  border-radius:50%;
+  border:2.5px solid rgba(255,255,255,.4);
+  background:rgba(255,255,255,.06);
+  transform:translate(-50%,-50%);
+  z-index:1;
+}
+
+.wire-plug {
+  position:absolute;
+  width:3.4vmin;
+  height:3.4vmin;
+  border-radius:50%;
+  border:3px solid var(--ink);
+  cursor:grab;
+  transform:translate(-50%,-50%);
+  z-index:3;
+  box-shadow:0 .4vmin 1vmin rgba(0,0,0,.4);
+  transition:left .3s ease, top .3s ease;
+}
+.wire-plug.is-dragging {
+  cursor:grabbing;
+  transition:none;
+  z-index:5;
+}
+.wire-plug.is-correct {
+  background:var(--green);
+}
+.wire-plug.is-incorrect {
+  background:var(--pink);
+}
+
+/* =========================================================
+   ФИНАЛЬНАЯ ЦЕПЬ (перетаскиваемые карточки, провода тянутся)
+   ========================================================= */
+.circuit-board {
+  position:relative;
+  width:100%;
+  height:50vmin;
+  margin:2vmin 0;
+  background:rgba(255,255,255,.03);
+  border-radius:1.6vmin;
+  border:1px dashed rgba(255,255,255,.15);
+  overflow:hidden;
+  touch-action:none;
+}
+.circuit-wires {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+}
+.circuit-wire {
+  stroke-width:6px;
+  fill:none;
+  stroke-linecap:round;
+}
+.circuit-wire.correct {
+  stroke:var(--green);
+}
+.circuit-wire.incorrect {
+  stroke:var(--red);
+  stroke-dasharray:10 8;
+}
+
+.circuit-node {
+  position:absolute;
+  background:rgba(255,255,255,.06);
+  border:1.5px solid rgba(255,255,255,.22);
+  border-radius:14px;
+  padding:14px 20px;
+  font-family:var(--font-main);
+  font-weight:700;
+  font-size:clamp(12px,1.5vmin,15px);
+  color:var(--paper);
+  text-align:center;
+  cursor:grab;
+  user-select:none;
+  touch-action:none;
+  box-shadow:0 6px 16px rgba(0,0,0,.35);
+  transition:left .35s ease, top .35s ease, box-shadow .2s ease, border-color .2s ease;
+  z-index:2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.t2-logo {
+  width: 20px;
+  height: 20px;
+}
+.circuit-node.is-dragging {
+  cursor:grabbing;
+  z-index:5;
+  box-shadow:0 10px 26px rgba(0,0,0,.5);
+  border-color:var(--violet);
+  transition:none;
+}
+.circuit-board.is-solved .circuit-node {
+  border-color:var(--green);
+}
+
+/* =========================================================
+   ЭКРАН: ПОБЕДА
+   ========================================================= */
+.victory-inner {
+  position:relative;
+  z-index:2;
+  max-width:70vmin;
+  text-align:center;
+  padding:4vmin;
+  margin-bottom: 10%;
+}
+.t2-logo-final {
+  position: relative;
+  height: 30px;
+  width: 30px;
+  top: 4px;
+}
+h2.victory-title {
+  font-family:var(--font--bold);
+  font-size:25px;
+  color:var(--white);
+  margin:0 0 1.6vmin;
+}
+p.victory-text {
+  font-size:18px;
+  color:white;
+  line-height:1.55;
+  margin:0 0 2vmin;
+  font-family: var(--font--main);
+}
+
+.relay-row {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:1.6vmin;
+  margin:0 auto .8vmin;
+  position:relative;
+  max-width:56vmin;
+}
+.relay-icon {
+  width:6vmin;
+  height:6vmin;
+  border:1.5px solid rgba(0, 0, 0);
+  border-radius:1.2vmin;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:none;
+}
+.relay-icon svg {
+  width:60%;
+  height:60%;
+  fill:var(--green);
+}
+.relay-line {
+  flex:1;
+  height:2px;
+  background:repeating-linear-gradient(90deg,rgba(0, 0, 0) 0 6px,transparent 6px 12px);
+  position:relative;
+  overflow:hidden;
+}
+.final-icon {
+  filter: brightness(0);
+  height: 30px;
+}
+.relay-dot {
+  position:absolute;
+  top:50%;
+  left:0;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:var(--pink);
+  transform:translateY(-50%);
+  animation:relay-move 2.6s linear infinite;
+}
+@keyframes relay-move {
+  0% {
+    left:0%;
+  }
+  100% {
+    left:100%;
+  }
+}
+.relay-caption {
+  font-size:1.3vmin;
+  color:white;
+  margin:0 0 3vmin;
+}
+
+.bonus-card {
+  background:black;
+  border-radius:2vmin;
+  padding:2.4vmin;
+  margin:3vmin auto 3vmin;
+  max-width:46vmin;
+}
+.bonus-label {
+  font-size:14px;
+  letter-spacing:.03em;
+  color:var(--pink);
+  margin-bottom:.8vmin;
+}
+.bonus-value {
+  font-family:var(--font-main);
+  font-weight:700;
+  font-size:clamp(18px,2.6vmin,26px);
+  color:var(--white);
+}
+
+.victory-actions {
+  display:flex;
+  gap:2vmin;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+/* =========================================================
+   АДАПТАЦИЯ ПОД УЗКИЕ ЭКРАНЫ
+   ========================================================= */
+@media (max-width:640px) {
+  .hotspot--house {
+    width:34vw;
+    height:28vw;
+    left:4vw;
+  }
+  .hotspot--lightning {
+    width:10vw;
+    height:10vw;
+    left:16vw;
+    bottom:34vh;
+  }
+  .hotspot--tower {
+    width:22vw;
+    height:40vh;
+    left:44vw;
+  }
+  #decor-car {
+    display:none;
+  }
+  #decor-poles {
+    display:none;
+  }
+  .mascot {
+    max-width:80vw;
+  }
+  .device-panel {
+    width:70vw;
+  }
+  .progress-corner {
+    width:36vw;
+  }
+}

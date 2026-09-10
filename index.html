@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="assets/icons/icon.ico" type="image/x-icon">
+
+<title>Tele2 — Стань телеком-инженером</title>
+
+<link rel="stylesheet" href="styles-1.css">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ======================================================= -->
+  <!-- ЭКРАН 1. ЗАСТАВКА                                        -->
+  <!-- ======================================================= -->
+  <section class="screen is-active" id="screen-title">
+    <img class="bg-image" src="assets/bg_intro.jpg" alt="intro">
+    <img class="bg-image-cell_tower" src="assets/cell_tower.png" alt="cell_tower">
+    <img class="bg-image-pillars" src="assets/pillars.png" alt="pillars">
+    <div class="title-inner">
+      <h1 class="hero">Попробуй себя в роли телеком-инженера</h1>
+      <p class="lede">Спаси сеть Т2, узнай об этой интересной профессии и получи возможность выиграть минуты и гигабайты интернета!</p>
+      <button class="btn-primary" id="btn-start">Начать</button>
+    </div>
+  </section>
+
+  <!-- ======================================================= -->
+  <!-- ЭКРАН 2. ОСНОВНАЯ СЦЕНА                                  -->
+  <!-- ======================================================= -->
+  <section class="screen" id="screen-main">
+
+    <!-- прогресс-бар, верхний правый угол -->
+    <div class="progress-corner" id="progress-corner">
+      <div class="progress-corner__label">Уровень сети</div>
+      <div class="progress-corner__track">
+        <div class="progress-corner__fill" id="progress-fill"></div>
+      </div>
+      <div class="progress-corner__value" id="progress-value">0%</div>
+    </div>
+
+    <div id="scene">
+      <img class="bg-image" src="assets/bg_game.jpg" alt="bg">
+      <img class="decor" id="decor-pillars-one" src="assets/objects/pillars-game.png" alt="pilars">
+      <img class="decor" id="decor-pillars-two" src="assets/objects/pillars-game.png" alt="pilars">
+      <img class="decor" id="decor-car" src="assets/objects/car.png" alt="car">
+      <button class="hotspot hotspot--house is-locked" id="hotspot-house" aria-label="Разобраться с проводами в доме">
+        <img class="hotspot-img" id="img-house" src="assets/objects/house-pink.png" alt="Дом23">
+      </button>
+      <button class="hotspot hotspot--lightning" id="hotspot-lightning" aria-label="Открыть радиооборудование">
+        <img class="hotspot-img" id="img-lightning" src="assets/objects/lightning_pink.png" alt="Молния">
+      </button>
+      <button class="hotspot hotspot--tower" id="hotspot-tower" aria-label="Проверить вышку с антеннами">
+        <img class="hotspot-img" id="img-tower" src="assets/objects/tower-pink.png" alt="Вышка">
+      </button>
+      <img class="decor" id="decor-car" src="assets/objects/car.png" alt="car">
+    </div>
+
+    <div class="complete-cta" id="final-stage-cta">
+        <button class="btn-primary" id="btn-final-stage">Пора собрать линию сигнала →</button>
+      </div>
+    <!-- прозрачный слой, ловящий клики "по пустому месту" во время реплик маскота -->
+    <div class="dialogue-catcher" id="dialogue-catcher"></div>
+
+    <!-- ---- OVERLAY: ВЫШКА (крупный план + тестер сигнала) ---- -->
+    <div class="overlay" id="overlay-tower">
+      <img class="tower-zoom" id="tower-zoom-img" src="assets/tower-pink.jpg" alt="Вышка крупным планом">
+
+      <div class="device-panel" id="device-panel">
+        <div class="device-panel__reading" id="device-reading">Тестер сигнала молчит</div>
+        <img class="device-panel__art" id="device-art" src="assets/minigame/signal-tester-idle.png" alt="">
+        <button class="btn-small" id="btn-run-test">Запустить проверку</button>
+      </div>
+
+      <button class="btn-back overlay-return" id="tower-back">← Вернуться на станцию</button>
+    </div>
+
+    <!-- ---- OVERLAY: РАДИООБОРУДОВАНИЕ (питание + радиомодуль) ---- -->
+    <div class="overlay" id="overlay-equipment">
+      <div class="overlay-panel">
+        <div class="overlay-eyebrow">Радиооборудование</div>
+        <h3 class="overlay-title">Станция Т2</h3>
+
+        <div class="status-row">
+          <div class="status-text">
+            <b><img src="assets/icons/battery.svg"> Питание</b>
+            <div class="power-slider-wrap">
+              <input type="range" id="power-slider" min="0" max="4" step="1" value="1">
+              <div class="power-slider-ticks">
+                <span>12</span><span>24</span><span>36</span><span>48</span><span>72</span>
+              </div>
+            </div>
+            <div class="inline-msg" id="voltage-msg">Питание слишком низкое</div>
+          </div>
+        </div>
+
+        <div class="status-row">
+          <div class="status-text">
+            <b><img src="assets/icons/tower.svg"> Радиомодуль</b>
+            Модуль завис и не передаёт сигнал дальше.
+            <div class="chip-row">
+              <button class="btn-small" id="btn-restart-module">Перезапустить модуль</button>
+            </div>
+            <div class="inline-msg" id="module-msg"></div>
+            <div class="status-block">
+              <div class="status-title"><img src="assets/icons/battery.svg"> Резервное питание</div>
+
+              <div class="status-ok">
+                  <span class="status-dot"></span>
+                  <span>Всё в порядке</span>
+              </div>
+          </div>
+
+          <div class="status-block">
+              <div class="status-title"><img src="assets/icons/plug.svg"> Соединения</div>
+
+              <div class="connections">
+                  <span class="connection-dot pink"></span>
+                  <span class="connection-dot green"></span>
+                  <span class="connection-dot blue"></span>
+              </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="overlay-actions">
+          <button class="btn-back" id="equipment-back">← Назад на станцию</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---- OVERLAY: ПРОВОДА В ДОМЕ ---- -->
+    <div class="overlay" id="overlay-wires">
+      <div class="wires-panel">
+        <img class="bg-wires" src="assets/minigame/wires.jpg">
+        <div class="wires-board" id="wires-board">
+          <svg class="wires-svg" id="wires-svg"></svg>
+        </div>
+        <div class="inline-msg" id="wires-msg"></div>
+        <div class="overlay-actions">
+          <button class="btn-back" id="wires-back">← Назад на станцию</button>
+          <button class="btn-small" id="wires-continue" style="display:none;">Продолжить →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---- OVERLAY: ФИНАЛЬНАЯ ЦЕПЬ (последний этап) ---- -->
+    <div class="overlay" id="overlay-circuit">
+      <div class="overlay-panel">
+        <h3 class="overlay-title">Собери линию сигнала</h3>
+        <p class="overlay-body">
+          Перетаскивай карточки, чтобы выстроить верный порядок
+        </p>
+
+        <div class="circuit-board" id="circuit-board">
+          <svg class="circuit-wires" id="circuit-wires"></svg>
+        </div>
+
+        <div class="inline-msg" id="circuit-msg"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================= -->
+  <!-- ЭКРАН 3. ПОБЕДА                                          -->
+  <!-- ======================================================= -->
+  <section class="screen" id="screen-victory">
+    <img class="bg-image" src="assets/bg_intro.jpg" alt="intro">
+    <img class="bg-image-cell_tower" src="assets/cell_tower.png" alt="cell_tower">
+    <div class="victory-inner">
+      <p class="victory-text">
+        Поздравляем с успешным прохождением!
+      </p>
+      <h2 class="victory-title"><span class="t2-logo-final-place"><img class="t2-logo-final" src="assets/icons/t2_Logo_White_sRGB.svg"></span> Поддерживаем связь для тех, кто делает важное.</h2>
+      <div class="relay-row" aria-hidden="true">
+        <div class="relay-icon"><img class="final-icon" src="assets/icons/phone.svg"></div>
+        <div class="relay-line"><div class="relay-dot"></div></div>
+        <div class="relay-icon"><img class="final-icon" src="assets/icons/tower.svg"></div>
+        <div class="relay-line"><div class="relay-dot" style="animation-delay:.6s"></div></div>
+        <div class="relay-icon"><img class="final-icon" src="assets/icons/power.svg"></div>
+        <div class="relay-line"><div class="relay-dot" style="animation-delay:1.2s"></div></div>
+        <div class="relay-icon"><img  src="assets/icons/t2_Logo_Black_sRGB.svg"></div>
+      </div>
+
+      <div class="bonus-card">
+        <div class="bonus-label">Твой бонус</div>
+        <div class="bonus-value" id="bonus-value">5 ГБ интернета</div>
+      </div>
+
+      <div class="victory-actions">
+        <a class="btn-primary" href="#" id="link-learn" style="text-decoration:none;display:inline-block;">Узнать про профессию телеком-инженера</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ======================================================= -->
+<!-- МАСКОТ (общий элемент, переключает позу 1/2 и позицию)   -->
+<!-- ======================================================= -->
+<div class="mascot mascot--right" id="mascot">
+  <img class="mascot-figure" id="mascot-figure" src="assets/mascot-pose-1.png" alt="Помощник">
+  <div class="speech-bubble" id="mascot-bubble">
+    <p id="mascot-text">Привет!</p>
+    <span class="bubble-continue" id="bubble-continue"></span>
+  </div>
+</div>
+
+<script src="script-3-2.js"></script>
+</body>
+</html>
