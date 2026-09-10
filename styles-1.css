@@ -11,6 +11,23 @@
   --font-main: 'Montserrat Alternates Regular', sans-serif;
   --font--bold: 'Montserrat Alternates Bold', sans-serif;
 }
+.demo-disclaimer {
+  position: fixed;
+  left: 1.6vmin;
+  bottom: 1.6vmin;
+  z-index: 999;
+  padding: 0.8vmin 1.6vmin;
+  border-radius: 100px;
+  background: rgba(5, 16, 25, .55);
+  border: 1px solid rgba(255, 255, 255, .15);
+  color: var(--paper);
+  font-family: var(--font-main);
+  font-size: clamp(10px, 1.1vmin, 13px);
+  font-weight: 500;
+  opacity: .65;
+  pointer-events: none;
+  backdrop-filter: blur(2px);
+}
 @font-face {
   font-family: 'Montserrat Alternates Regular';
   src: url('./assets/fonts/MontserratAlternates-Regular.ttf');
