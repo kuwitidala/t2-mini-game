@@ -667,7 +667,12 @@
       }, 1600);
     }
   }
-
+  $("#btn-final-stage").addEventListener("click", () => {
+    if (!sequence) {
+      closeOverlays();
+      openCircuitPuzzle();
+    }
+  });
   function openCircuitPuzzle() {
     state.circuitOrder = shuffleCircuitOrder();
     state.circuitSolved = false;
