@@ -2,7 +2,7 @@
   "use strict";
 
 
-/*данные и настройки*/
+//данные и настройки
    
   const POWER_STOPS = [12, 24, 36, 48, 72];
   const POWER_CORRECT_INDEX = 3;
@@ -41,7 +41,7 @@
     "3 ГБ интернета",
   ];
 
-  /* состояние игры */
+  // состояние игры
   const state = {
     introDone: false,
     towerVisited: false,
@@ -61,7 +61,7 @@
     dragWire: null
   };
 
-  /* хелперы */
+  // хелперы
   const $ = (sel, root) => (root || document).querySelector(sel);
   const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
 
@@ -95,7 +95,7 @@
     return "";
   }
 
-/*маскот сцены*/
+// маскот сцены
   const mascotEl = $("#mascot");
   const mascotFigure = $("#mascot-figure");
   const mascotBubble = $("#mascot-bubble");
@@ -127,7 +127,7 @@
 
   let sequence = null;
 
-  // lines = [{ text, position: "left"|"right" }]
+
   function playSequence(lines, onComplete) {
     sequence = { lines: lines.slice(), index: 0, onComplete: onComplete || null };
     sceneEl.classList.add("scene-locked");
@@ -179,7 +179,7 @@
     }, 6000);
   }
 
-  /* прогресс бар */
+  // прогресс бар
   function refreshProgressBar() {
     const p = progress();
     const fill = $("#progress-fill");
@@ -188,9 +188,7 @@
     $("#progress-value").textContent = p + "%";
   }
 
-  /* ---------------------------------------------------------
-     ОБНОВЛЕНИЕ ИКОНОК НА СЦЕНЕ
-     --------------------------------------------------------- */
+  // обновление иконок 
   function refreshScene() {
     refreshProgressBar();
 
@@ -204,9 +202,7 @@
     $("#final-stage-cta").classList.toggle("is-visible", state.wiresSolved && !state.circuitSolved);
   }
 
-  /* ---------------------------------------------------------
-     ОТКРЫТИЕ / ЗАКРЫТИЕ ОКОН
-     --------------------------------------------------------- */
+  /* открытие и закрытие окон */
   function openOverlay(id) {
     sceneEl.classList.add("blurred");
     $(id).classList.add("is-active");
@@ -216,7 +212,7 @@
     $$(".overlay").forEach((o) => o.classList.remove("is-active"));
     $("#device-panel").classList.remove("is-visible");
 
-    // если в мини-игре ещё шла реплика — обрываем её вместе с закрытием окна
+
     if (sequence) {
       sequence = null;
       sceneEl.classList.remove("scene-locked");
@@ -229,9 +225,6 @@
     refreshScene();
   }
 
-  /* ---------------------------------------------------------
-     ВЫШКА: крупный план + тестер сигнала
-     --------------------------------------------------------- */
   function openTower() {
     state.towerVisited = true;
     openOverlay("#overlay-tower");
@@ -268,7 +261,7 @@
       if (!good && !sequence) {
         playSequence([
           {
-            text: "Похоже, где-то плохой контакт. Осмотри радиооборудование, а потом загялни в щиток дома, там поймем в чём дело.",
+            text: "Похоже, где-то плохой контакт. Осмотри радиооборудование, а потом загляни в щиток дома, там поймем в чём дело.",
             position: "left"
           }
         ]);
@@ -278,9 +271,8 @@
 
   $("#tower-back").addEventListener("click", closeOverlays);
 
-  /* ---------------------------------------------------------
-     РАДИООБОРУДОВАНИЕ: питание (слайдер) + радиомодуль
-     --------------------------------------------------------- */
+  // радиооборудование
+  
   function refreshEquipmentUI() {
     $("#power-slider").value = state.powerIndex;
     const msg = $("#voltage-msg");
@@ -330,9 +322,7 @@
 
   $("#equipment-back").addEventListener("click", closeOverlays);
 
-  /* ---------------------------------------------------------
-     ПРОВОДА В ДОМЕ — штекеры тянем мышью/пальцем
-     --------------------------------------------------------- */
+  /* провода */
   function shuffleWireAssignment() {
     let arr;
     do {
@@ -349,10 +339,8 @@
     const board = $("#wires-board");
     const rect = board.getBoundingClientRect();
     const ys = [0.2, 0.5, 0.8].map((f) => f * rect.height);
-    // подписи (DATA/RF/POWER и ANT/DATA/PWR) стоят у края, ближе к разъёмам, и никогда не двигаются
     const labelLeftX = rect.width * 0.16;
     const labelRightX = rect.width * 0.84;
-    // а сами разъёмы, куда цепляется провод, — чуть ближе к центру
     const anchorLeftX = rect.width * 0.28;
     const anchorRightX = rect.width * 0.72;
     return {
@@ -372,7 +360,7 @@
 
     const pos = wireSocketPositions();
 
-    // подписи слева — всегда на месте, отдельно от разъёмов
+
     LEFT_LABELS.forEach((label, i) => {
       const el = document.createElement("div");
       el.className = "wire-socket left";
@@ -388,7 +376,6 @@
       board.appendChild(anchor);
     });
 
-    // подписи справа — тоже всегда на месте и всегда видны
     RIGHT_LABELS.forEach((label, j) => {
       const el = document.createElement("div");
       el.className = "wire-socket right";
@@ -426,7 +413,6 @@
       board.appendChild(plug);
     });
 
-    // линии — тянутся от разъёма (не от подписи) к текущему месту штекера
     LEFT_LABELS.forEach((label, i) => {
       const isDragging = state.dragWire && state.dragWire.index === i;
       const socketIdx = state.wireAssignment[i];
@@ -522,9 +508,7 @@
 
   $("#wires-back").addEventListener("click", closeOverlays);
 
-  /* ---------------------------------------------------------
-     ФИНАЛЬНАЯ ЦЕПЬ — перетаскиваемые карточки, провода тянутся
-     --------------------------------------------------------- */
+
   const circuitNodeEls = {};
 
   function circuitSlotPositions() {
@@ -696,9 +680,6 @@
     sayOnce("Вот мы и добрались до последнего этапа — собери линию сигнала, и связь вернётся!", "right");
   }
 
-  /* ---------------------------------------------------------
-     НАВИГАЦИЯ И СТАРТ
-     --------------------------------------------------------- */
   $("#btn-start").addEventListener("click", () => {
     showScreen("screen-main");
     refreshScene();
@@ -743,8 +724,5 @@
     if ($("#overlay-circuit").classList.contains("is-active")) layoutCircuitNodes();
   });
 
-  /* ---------------------------------------------------------
-     ИНИЦИАЛИЗАЦИЯ
-     --------------------------------------------------------- */
   refreshScene();
 })();
