@@ -1,18 +1,11 @@
-/* =========================================================
-   TELE2 · СИМУЛЯТОР ИНЖЕНЕРА — ЛОГИКА ИГРЫ
-   Файл не минифицирован специально — так удобнее дорабатывать.
-   Все картинки объектов лежат в /assets и являются заглушками:
-   просто замени файлы с теми же именами на финальный арт.
-   ========================================================= */
-
 (function () {
   "use strict";
 
-  /* ---------------------------------------------------------
-     ДАННЫЕ И НАСТРОЙКИ
-     --------------------------------------------------------- */
+
+/*данные и настройки*/
+   
   const POWER_STOPS = [12, 24, 36, 48, 72];
-  const POWER_CORRECT_INDEX = 3; // соответствует 48
+  const POWER_CORRECT_INDEX = 3;
   const POWER_MESSAGES = [
     `Питание критически низкое <img class="radio-icon" src="assets/icons/warning.svg">`,
     "Питание слишком низкое",
@@ -23,7 +16,7 @@
 
   const LEFT_LABELS = ["DATA", "RF", "POWER"];
   const RIGHT_LABELS = ["ANT", "DATA", "PWR"];
-  // какому правому разъёму должен соответствовать каждый левый (по значению, не по цвету)
+
   const CORRECT_RIGHT_FOR_LEFT = LEFT_LABELS.map((label) => {
     const map = { DATA: "DATA", RF: "ANT", POWER: "PWR" };
     return RIGHT_LABELS.indexOf(map[label]);
@@ -48,31 +41,27 @@
     "3 ГБ интернета",
   ];
 
-  /* ---------------------------------------------------------
-     СОСТОЯНИЕ ИГРЫ
-     --------------------------------------------------------- */
+  /* состояние игры */
   const state = {
     introDone: false,
     towerVisited: false,
     equipmentVisited: false,
     equipmentIntroShown: false,
 
-    powerIndex: 1,           // старт на "24"
+    powerIndex: 1,
     moduleOn: false,
 
-    wireAssignment: [0, 1, 2], // перестановка: left-индекс -> right-сокет
+    wireAssignment: [0, 1, 2],
     wiresSolved: false,
 
-    circuitOrder: ["power", "radio", "antenna", "network"], // будет перемешан при открытии
+    circuitOrder: ["power", "radio", "antenna", "network"],
     circuitSolved: false,
 
-    dragCircuit: null, // текущее перетаскивание карточки финальной цепи
-    dragWire: null      // текущее перетаскивание штекера
+    dragCircuit: null,
+    dragWire: null
   };
 
-  /* ---------------------------------------------------------
-     ХЕЛПЕРЫ
-     --------------------------------------------------------- */
+  /* хелперы */
   const $ = (sel, root) => (root || document).querySelector(sel);
   const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
 
@@ -106,9 +95,7 @@
     return "";
   }
 
-  /* ---------------------------------------------------------
-     МАСКОТ: позиция (лево/право), поза (1/2), очередь реплик
-     --------------------------------------------------------- */
+/*маскот сцены*/
   const mascotEl = $("#mascot");
   const mascotFigure = $("#mascot-figure");
   const mascotBubble = $("#mascot-bubble");
@@ -192,9 +179,7 @@
     }, 6000);
   }
 
-  /* ---------------------------------------------------------
-     ПРОГРЕСС-БАР (верхний правый угол)
-     --------------------------------------------------------- */
+  /* прогресс бар */
   function refreshProgressBar() {
     const p = progress();
     const fill = $("#progress-fill");
