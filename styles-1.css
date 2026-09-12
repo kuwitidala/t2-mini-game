@@ -397,7 +397,7 @@ p.lede {
   bottom:3vmin;
   left:50%;
   transform:translate(-50%,140%);
-  z-index:7;
+  z-index:56;
   transition:transform .4s ease;
 }
 .complete-cta.is-visible {
