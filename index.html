@@ -13,9 +13,6 @@
 
 <div id="app">
 
-  <!-- ======================================================= -->
-  <!-- ЭКРАН 1. ЗАСТАВКА                                        -->
-  <!-- ======================================================= -->
   <section class="screen is-active" id="screen-title">
     <img class="bg-image" src="assets/bg_intro.jpg" alt="intro">
     <img class="bg-image-cell_tower" src="assets/cell_tower.png" alt="cell_tower">
@@ -27,12 +24,8 @@
     </div>
   </section>
 
-  <!-- ======================================================= -->
-  <!-- ЭКРАН 2. ОСНОВНАЯ СЦЕНА                                  -->
-  <!-- ======================================================= -->
   <section class="screen" id="screen-main">
 
-    <!-- прогресс-бар, верхний правый угол -->
     <div class="progress-corner" id="progress-corner">
       <div class="progress-corner__label">Уровень сети</div>
       <div class="progress-corner__track">
@@ -61,10 +54,10 @@
     <div class="complete-cta" id="final-stage-cta">
         <button class="btn-primary" id="btn-final-stage">Пора собрать линию сигнала →</button>
       </div>
-    <!-- прозрачный слой, ловящий клики "по пустому месту" во время реплик маскота -->
+
     <div class="dialogue-catcher" id="dialogue-catcher"></div>
 
-    <!-- ---- OVERLAY: ВЫШКА (крупный план + тестер сигнала) ---- -->
+
     <div class="overlay" id="overlay-tower">
       <img class="tower-zoom" id="tower-zoom-img" src="assets/tower-pink.jpg" alt="Вышка крупным планом">
 
@@ -77,7 +70,6 @@
       <button class="btn-back overlay-return" id="tower-back">← Вернуться на станцию</button>
     </div>
 
-    <!-- ---- OVERLAY: РАДИООБОРУДОВАНИЕ (питание + радиомодуль) ---- -->
     <div class="overlay" id="overlay-equipment">
       <div class="overlay-panel">
         <div class="overlay-eyebrow">Радиооборудование</div>
@@ -132,7 +124,6 @@
       </div>
     </div>
 
-    <!-- ---- OVERLAY: ПРОВОДА В ДОМЕ ---- -->
     <div class="overlay" id="overlay-wires">
       <div class="wires-panel">
         <img class="bg-wires" src="assets/minigame/wires.jpg">
@@ -147,7 +138,7 @@
       </div>
     </div>
 
-    <!-- ---- OVERLAY: ФИНАЛЬНАЯ ЦЕПЬ (последний этап) ---- -->
+  
     <div class="overlay" id="overlay-circuit">
       <div class="overlay-panel">
         <h3 class="overlay-title">Собери линию сигнала</h3>
@@ -164,9 +155,6 @@
     </div>
   </section>
 
-  <!-- ======================================================= -->
-  <!-- ЭКРАН 3. ПОБЕДА                                          -->
-  <!-- ======================================================= -->
   <section class="screen" id="screen-victory">
     <img class="bg-image" src="assets/bg_intro.jpg" alt="intro">
     <img class="bg-image-cell_tower" src="assets/cell_tower.png" alt="cell_tower">
@@ -198,9 +186,6 @@
 
 </div>
 
-<!-- ======================================================= -->
-<!-- МАСКОТ (общий элемент, переключает позу 1/2 и позицию)   -->
-<!-- ======================================================= -->
 <div class="mascot mascot--right" id="mascot">
   <img class="mascot-figure" id="mascot-figure" src="assets/mascot-pose-1.png" alt="Помощник">
   <div class="speech-bubble" id="mascot-bubble">
